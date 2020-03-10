@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from random import shuffle
 
 
 class Party(models.Model):
@@ -9,6 +10,17 @@ class Party(models.Model):
 
     def __str__(self):
         return self.title
+
+    def gen_donations(self):
+        Donation.objects.filter(party=self).delete()
+        party_participants = self.participants.all()
+        shuffled_indices = list(range(len(party_participants)))
+        shuffle(shuffled_indices)
+        for i in range(len(party_participants)):
+            donor = party_participants[shuffled_indices[i]]
+            presentee = party_participants[shuffled_indices[(i+1) % len(party_participants)]]
+            Donation.objects.create(party=self, donor=donor, presentee=presentee)
+        return
 
 
 class Donation(models.Model):
