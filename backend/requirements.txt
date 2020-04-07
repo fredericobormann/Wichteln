@@ -1,2 +1,17 @@
 Django>=3.0.3
 psycopg2-binary==2.8.3
+astroid
+colorama
+django-cors-headers
+django-filter
+djangorestframework
+djangorestframework-jwt
+isort
+lazy-object-proxy
+mccabe
+pycodestyle
+PyJWT
+pytz
+six
+typed-ast
+wrapt
